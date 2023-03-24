@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <body style="text-align:center">
+        <b> <u> <p style="font-size:50px ;"> Digit Addition </p> </u> </b>
+        <p id="p1" style="font-size:20px"> Enter the number you want to calculate the sum of, or you can use the buttons to automatically generate a number for you based on basic options </p>
+        <input type="number" id="inp1" style="font-size:20px" title="Use this text box to enter the number to find the sum of its digits">
+        <button id="btn1" onclick="generate()" style="font-size:20px"> Generate Random Number</button>
+        <button id="digit_btn" onclick="generate_digit_number()" style="font-size:20px"> Choose Number of Digits </button>
+        <button id="range_btn" onclick="generate_range_number()" style="font-size:20px"> Choose Range of Numbers </button>
+        <button id="back" onclick="back()" style="font-size:20px"> back </button>
+        <input type="number" id="digit_input" style="font-size:20px">
+        <input type="number" id="range_input" style="font-size:20px">
+        <script>
+            function generate()
+            {
+                document.getElementById("btn1").style.display="none"
+                document.getElementById("digit_btn").style.display="inline"
+                document.getElementById("range_btn").style.display="inline"
+                document.getElementById("back").style.display="inline"
+                document.getElementById("p1").style.display="none"
+                document.getElementById("inp1").style.display="none"
+            }
+
+            function back()
+            {
+                document.getElementById("btn1").style.display="inline"
+                document.getElementById("digit_btn").style.display="none"
+                document.getElementById("range_btn").style.display="none"
+                document.getElementById("back").style.display="none"
+                document.getElementById("p1").style.display="inline"
+                document.getElementById("inp1").style.display="inline"
+            }
+            document.getElementById("digit_btn").style.display="none"
+            document.getElementById("range_btn").style.display="none"
+            document.getElementById("digit_input").style.display="none"
+            document.getElementById("back").style.display="none"
+            document.getElementById("range_input").style.display="none"
+        </script>
+    </body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <body style="text-align:center; font-size:25px">
+        <b> <u> <p style="font-size:50px ;"> Digit Addition </p> </u> </b>
+        <div id="scrn1">
+            <p id="p1" > Enter the number you want to calculate the sum of, or you can use the buttons to automatically generate a number for you based on basic options </p>
+            <br>
+            <input type="text" id="inp1" style="font-size:25px" title="Use this text box to enter the number to find the sum of its digits">
+            <button id="inp_click" onclick="digit_sum()" style="font-size:25px"> Calculate </button>
+            <br><br>
+            <button id="btn1" onclick="generate()" style="font-size:25px"> Generate Number</button>
+        </div>
+        
+        <div id="generate_scrn" style="font-size:25px">
+            <button id="digit_btn" onclick="generate_digit_number()" style="font-size:25px"> Choose Number of Digits </button>
+            <br><br>
+            <button id="range_btn" onclick="generate_range_number()" style="font-size:25px"> Choose Range of Numbers </button>
+            <br><br>
+            <button id="back" onclick="back()" style="font-size:25px"> back </button>
+        </div>
+        <div id="dgt_inp_scrn">
+            <p> Enter the number of digits you want the number to have
+                <br>
+                Note: the generator will not make random numbers for digit 18 onwards, but will still contain the desired number of digits
+            </p>
+            <input type="text" id="digit_input" style="font-size:25px">
+            <Button id="dgt_btn" onclick="dgt_generate()" style="font-size:25px"> Calculate </Button>
+            <p id="dgt_show" style="font-size:30px"></p>
+            <div id="dgt_gen_sum">
+                <button id="dgt_gen_sum_btn" style="font-size:25px" onclick="rand_dgt_sum()"> Calculate </button>
+                <p id="dgt_gen_show"></p>
+            </div>
+            <br><br><br>
+            <button id="back2" onclick="back2()" style="font-size:25px"> back </button>
+        </div>
+        <div id="rng_select">
+            <button id="single_select_btn" style="font-size:25px" onclick="single_range_show()"> Single range </button>
+            <br><br>
+            <button id="doube_range_select_btn" style="font-size:25px" onclick="double_range_show()"> Double range </button>
+            <br><br>
+            <button id="back3" onclick="back3()" style="font-size:25px"> back </button>
+        </div>
+        <div id="single_range">
+            <p> Enter a number. It will then generate a random number between 1 and that number </p>
+            <input type="text" id="single_input" style="font-size:25px">
+            <button id="single_generate" style="font-size:25px" onclick="generate_single()"> Generate </button>
+            <p id="single_show"></p>
+            <div id="single_sum">
+                <button id="single_sum_btn" onclick="single_sum()" style="font-size:25px"> Calculate </button>
+                <p id="single_calc_show"></p>
+            </div>
+            <button id="back4" onclick="back4()" style="font-size:25px"> back </button>
+        </div>
+        <div id="double_range">
+            <p> Enter a number into each box then click generate </p>
+            <input id="double_inp_1" type="text" style="font-size:25px;">
+            <br><br>
+            <input id="double_inp_2" style="font-size:25px" type="text">
+            <br><br>
+            <button id="double_generate" style="font-size:25px" onclick="double_gen()"> Generate </button>
+            <p id="double_show"></p>
+            <div id="double_calc">
+                <br>
+                <button id="double_calc_btn" style="font-size:25px" onclick="calc_double()"> Calculate </button>
+                <p id="double_calc_show"></p>
+            </div>
+            <br>
+            <button id="back5" style="font-size:25px" onclick="back5()"> back </button>
+        </div>
+        <script>
+            function calc_double()
+            {
+                var value = document.getElementById("double_show").innerHTML;
+                sum = 0;
+                while (value)
+                {
+                    sum += value % 10;
+                    value = Math.floor(value / 10);
+                }
+                document.getElementById("double_calc_show").innerHTML=sum;
+                document.getElementById("store_1").value="";
+                document.getElementById("store_2")
+            }
+            function double_gen()
+            {
+                document.getElementById("double_calc").style.display="block"
+                var store_1 = document.getElementById("double_inp_1").value
+                var store_2 = document.getElementById("double_inp_2").value
+                if (store_1 != store_2)
+                {
+                    if (store_1 < store_2)
+                    {
+                        var range = store_2 - store_1
+                        var low = store_1
+                    }
+                    else
+                    {
+                        var range = store_1 - store_2
+                        var low = store_2
+                    }
+                    var outcome = parseInt(low) + parseInt(Math.round(Math.random() * range))
+                    document.getElementById("double_show").innerHTML = outcome
+                }
+                else
+                {
+                    document.getElementById("double_show").innerHTML = store_1
+                }
+                document.getElementById("double_inp_1").value=""
+                document.getElementById("double_inp_2").value=""
+            }
+            function double_range_show()
+            {
+                document.getElementById("rng_select").style.display="none"
+                document.getElementById("double_range").style.display="block"
+            }
+            function back5()
+            {
+                document.getElementById("double_range").style.display="none"
+                document.getElementById("rng_select").style.display="block"
+                document.getElementById("double_inp_1").value=""
+                document.getElementById("double_inp_2").value=""
+                document.getElementById("double_calc_show").innerHTML=""
+                document.getElementById("double_show").innerHTML=""
+                document.getElementById("double_calc_btn").style.display="none"
+            }
+            function generate_single()
+            {
+                if (document.getElementById("single_input").value <=1)
+                {
+                    document.getElementById("single_show").style.color="red"
+                    document.getElementById("single_show").innerHTML="Do not enter a number that is less than 2"
+                }
+                else if (document.getElementById("single_input").value > 1)
+                {
+                    document.getElementById("single_show").style.color="black"
+                    document.getElementById("single_sum").style.display="block";
+                    var range = document.getElementById("single_input").value
+                    var random_number = Math.round(Math.random() * range)
+                    document.getElementById("single_show").innerHTML=random_number
+                    document.getElementById("single_input").value=""
+                }
+            }
+            function single_sum()
+            {
+                var value = document.getElementById("single_show").innerHTML;
+                sum = 0;
+                while (value)
+                {
+                    sum += value % 10;
+                    value = Math.floor(value / 10);
+                }
+                document.getElementById("single_calc_show").innerHTML=sum;
+                document.getElementById("single_input").value="";
+                }
+            function single_range_show()
+            {
+                document.getElementById("rng_select").style.display="none"
+                document.getElementById("single_range").style.display="block"
+            }
+            function back4()
+            {
+                document.getElementById("rng_select").style.display="block"
+                document.getElementById("single_range").style.display="none"
+                document.getElementById("single_input").value=""
+                document.getElementById("single_show").innerHTML=""
+                document.getElementById("single_sum_btn").style.display="none"
+                document.getElementById("single_calc_show").innerHTML=""
+            }
+            function back3()
+            {
+                document.getElementById("rng_select").style.display="none"
+                document.getElementById("generate_scrn").style.display="block"
+            }
+            function digit_sum()
+            {
+                if (document.getElementById("inp1").value < 0) 
+                {
+                    document.getElementById("sum").style.color="red"
+                    document.getElementById("inp1").value=''
+                    document.getElementById("sum").innerHTML='DO NOT ENTER A NUMBER THAT IS LESS THAN 0. ANY NEGATIVE NUMBERS WILL BREAK THE PROGRAM'
+                }
+                else if (document.getElementById("inp1").value > 0)
+                {
+                    document.getElementById("sum").style.color="black"
+                    var value = document.getElementById("inp1").value;
+                    sum = 0;
+                    while (value)
+                    {
+                        sum += value % 10;
+                        value = Math.floor(value / 10);
+                    }
+                    document.getElementById("sum").innerHTML=sum;
+                    document.getElementById("inp1").value='';
+                }
+            }
+            function rand_dgt_sum()
+            {
+                if (document.getElementById("dgt_show").innerHTML > 0)
+                {
+                    var value = document.getElementById("dgt_show").innerHTML;
+                    sum = 0;
+                    while (value)
+                    {
+                        sum += value % 10;
+                        value = Math.floor(value / 10);
+                    }
+                    document.getElementById("dgt_gen_show").innerHTML=sum;
+                    document.getElementById("dgt_gen_show").stlye.display="block"
+                }
+            }
+            function generate()
+            {
+                document.getElementById("scrn1").style.display="none";
+                document.getElementById("generate_scrn").style.display="block";
+                document.getElementById("sum").style.display="none"
+            }
+            function generate_digit_number()
+            {
+                document.getElementById("generate_scrn").style.display="none"
+                document.getElementById("dgt_inp_scrn").style.display="inline"
+                document.getElementById("dgt_gen_sum").style.display="none"
+            }
+            function generate_range_number()
+            {
+                document.getElementById("generate_scrn").style.display="none"
+                document.getElementById("rng_select").style.display="block"
+            }
+            function back()
+            {
+                document.getElementById("scrn1").style.display="block";
+                document.getElementById("generate_scrn").style.display="none";
+                document.getElementById("sum").style.display="block"
+                document.getElementById("sum").innerHTML=""
+            }
+            function back2()
+            {
+                document.getElementById("dgt_inp_scrn").style.display="none"
+                document.getElementById("digit_input").value=""
+                document.getElementById("dgt_show").innerHTML=""
+                document.getElementById("dgt_gen_show").innerHTML=""
+                document.getElementById("generate_scrn").style.display="block"
+            }
+            function dgt_generate()
+            {
+                if (document.getElementById("digit_input").value < 1)
+                {
+                    document.getElementById("dgt_show").style.color="red"
+                    document.getElementById("dgt_show").innerHTML="Only enter a number higher than 1"
+                }
+                else if (document.getElementById("digit_input").value > 1)
+                {
+                    document.getElementById("dgt_show").style.color="black"
+                    var min = (10 ** document.getElementById("digit_input").value)
+                    var max = ((10 ** document.getElementById("digit_input").value) / 10) - 1
+                    var random_number = Math.round(Math.random() * (max - min + 1)) + min
+                    document.getElementById("dgt_show").innerHTML=(random_number.toLocaleString('fullwide', {useGrouping:false}))
+                    document.getElementById("digit_input").value=""
+                    document.getElementById("dgt_gen_sum").style.display="block"
+                }
+                
+            }
+            document.getElementById("generate_scrn").style.display="none";
+            document.getElementById("dgt_inp_scrn").style.display="none";
+            document.getElementById("rng_select").style.display="none";
+            document.getElementById("single_range").style.display="none";
+            document.getElementById("single_sum").style.display="none";
+            document.getElementById("double_range").style.display="none";
+            document.getElementById("double_calc").style.display="none";
+        </script>
+    </body>
+</html>
